@@ -3,7 +3,7 @@ package me.qingkou.u24
 /**
  * Created by seeker on 4/24/2014.
  */
-class TrackableRational(val rational: Rational, val arith: Option[Arith[TrackableRational]]) {
+class TrackableRational(val rational: Rational, val arith: Option[Arith[TrackableRational]]) extends Ordered[TrackableRational] {
 
   def this(n: Int, d: Int, arith: Option[Arith[TrackableRational]]) = this(new Rational(n, d), arith)
   def this(n: Int, d: Int) = this(n, d, None)
@@ -41,4 +41,9 @@ class TrackableRational(val rational: Rational, val arith: Option[Arith[Trackabl
       case Some(ar) => rational.hashCode * 31 + ar.hashCode
       case None     => rational.hashCode
   }
+
+  override def compare(that: TrackableRational): Int = this.rational compare that.rational
+}
+object TrackableRational {
+  def ZERO = new TrackableRational(0)
 }

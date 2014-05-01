@@ -35,7 +35,7 @@ class Rational(n: Int, d: Int)  extends Ordered[Rational]{
     state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)
   }
 
-  override def toString = numer + "/" + denom;
+  override def toString = if(denom == 1) numer.toString else numer + "/" + denom;
 
   override def compare(that: Rational): Int = (this - that).numer
 }
